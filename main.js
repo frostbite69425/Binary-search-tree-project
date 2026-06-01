@@ -17,4 +17,5 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 prettyPrint(test.root);
-console.log(test);
+console.log(test.includes(69));
+console.log(test.includes(67));

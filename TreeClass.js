@@ -36,6 +36,30 @@ class Tree {
 
     return root;
   }
+
+  includes(value) {
+    let nextNode;
+    const root = this.root;
+    if (root.data === value) {
+      return true;
+    } else if (value > root.data) {
+      nextNode = root.rightChildren;
+    } else if (value < root.data) {
+      nextNode = root.leftChildren;
+    }
+
+    while (nextNode) {
+      if (value == nextNode.data) {
+        return true;
+      } else if (value < nextNode.data) {
+        nextNode = nextNode.leftChildren;
+      } else {
+        nextNode = nextNode.rightArr;
+      }
+    }
+
+    return false;
+  }
 }
 
 export default Tree;

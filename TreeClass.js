@@ -60,6 +60,36 @@ class Tree {
 
     return false;
   }
+
+  insert(value) {
+    let currentNode = this.root;
+    if (currentNode === value) {
+      return;
+    }
+    let nextNode;
+    if (value > currentNode.data) {
+      nextNode = currentNode.rightChildren;
+    } else {
+      nextNode = currentNode.leftChildren;
+    }
+
+    while (nextNode) {
+      if (nextNode.data === value) {
+        return;
+      } else if (nextNode.data < value) {
+        currentNode = nextNode;
+        nextNode = nextNode.rightChildren;
+      } else {
+        currentNode = nextNode;
+        nextNode = nextNode.leftChildren;
+      }
+    }
+    if (value > currentNode.data) {
+      currentNode.rightChildren = new Node(value);
+    } else {
+      currentNode.leftChildren = new Node(value);
+    }
+  }
 }
 
 export default Tree;

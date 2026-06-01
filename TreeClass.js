@@ -9,7 +9,7 @@ class Tree {
   #sortArr(array) {
     const returnArr = [];
     const sortedArr = array.sort((a, b) => a - b);
-    for (let i = 0; i < sortedArr.length - 1; i++) {
+    for (let i = 0; i < sortedArr.length; i++) {
       if (!returnArr.includes(sortedArr[i])) {
         returnArr.push(sortedArr[i]);
       }
@@ -21,16 +21,16 @@ class Tree {
     const mid = Math.floor((array.length - 1) / 2);
     const root = new Node(array[mid]);
 
-    const leftArr = array.slice(0, mid + 1);
-    const rightArr = array.slice(mid + 1);
-    if (leftArr.length === 1) {
-      root.leftChildren = null;
-    } else {
+    if (array.length === 2) {
+      if (array[0] > array[1]) {
+        root.leftChildren = new Node(array[1]);
+      } else {
+        root.rightChildren = new Node(array[1]);
+      }
+    } else if (array.length > 2) {
+      const leftArr = array.slice(0, mid);
+      const rightArr = array.slice(mid + 1);
       root.leftChildren = this.#buildTree(leftArr);
-    }
-    if (rightArr.length === 1) {
-      root.rightChildren = null;
-    } else {
       root.rightChildren = this.#buildTree(rightArr);
     }
 

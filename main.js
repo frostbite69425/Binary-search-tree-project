@@ -18,6 +18,16 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 prettyPrint(test.root);
 test.insert(70);
+console.log(`\n`);
 prettyPrint(test.root);
+// console.log(`\n`);
+// test.deleteItem(7);
+// prettyPrint(test.root);
+// console.log(`\n`);
+// test.deleteItem(1);
+// prettyPrint(test.root);
+// console.log(`\n`);
+// test.deleteItem(67);
+// prettyPrint(test.root);
 // console.log(test.includes(69));
 // console.log(test.includes(67));

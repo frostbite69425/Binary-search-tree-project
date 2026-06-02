@@ -61,34 +61,49 @@ class Tree {
     return false;
   }
 
-  insert(value) {
-    let currentNode = this.root;
-    if (currentNode === value) {
-      return;
-    }
-    let nextNode;
-    if (value > currentNode.data) {
-      nextNode = currentNode.rightChildren;
-    } else {
-      nextNode = currentNode.leftChildren;
+  insert(value, node = this.root) {
+    if (node === null) {
+      return new Node(value);
     }
 
-    while (nextNode) {
-      if (nextNode.data === value) {
-        return;
-      } else if (nextNode.data < value) {
-        currentNode = nextNode;
-        nextNode = nextNode.rightChildren;
-      } else {
-        currentNode = nextNode;
-        nextNode = nextNode.leftChildren;
-      }
-    }
-    if (value > currentNode.data) {
-      currentNode.rightChildren = new Node(value);
+    if (value > node.data) {
+      node.rightChildren = this.insert(value, node.rightChildren);
+    } else if (value < node.data) {
+      node.leftChildren = this.insert(value, node.leftChildren);
     } else {
-      currentNode.leftChildren = new Node(value);
+      return;
     }
+    return node;
+  }
+
+  #successorNode(node) {
+    let nextNode = node.rightChildren;
+    while (nextNode.leftChildren) {
+      nextNode = nextNode.leftChildren;
+    }
+    return nextNode;
+  }
+
+  deleteItem(value, node = this.root) {
+    if (node === null) {
+      return node;
+    }
+    if (value > node.data) {
+      node.rightChildren = this.deleteItem(value, node.rightChildren);
+    } else if (value < node.data) {
+      node.leftChildren = this.deleteItem(value, node.leftChildren);
+    } else {
+      if (node.leftChildren === null) {
+        return node.rightChildren;
+      } else if (node.rightChildren === null) {
+        return node.leftChildren;
+      }
+
+      const successor = this.#successorNode(node);
+      node.data = successor.data;
+      node.right = this.deleteItem(node.data, node.rightChildren);
+    }
+    return node;
   }
 }
 

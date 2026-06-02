@@ -21,7 +21,7 @@ test.insert(70);
 console.log(`\n`);
 prettyPrint(test.root);
 console.log(`\n`);
-test.levelOrderForEachRecursive((el) => console.log(el));
+test.levelOrderForEachIterative((el) => console.log(el));
 // test.deleteItem(7);
 // prettyPrint(test.root);
 // console.log(`\n`);

@@ -106,17 +106,14 @@ class Tree {
     return node;
   }
 
-  levelOrderForEachRecursive(callback, queue = [this.root]) {
+  levelOrderForEachIterative(callback, queue = [this.root]) {
     if (!callback && typeof callback !== "function") {
       throw new Error("You need to provide a callback function!");
     }
     let currentNode;
-    let queueLength = queue.length;
-    if (queueLength === 0) {
-      return;
-    }
-    for (let i = 0; i < queueLength; i++) {
+    for (let i = 0; i < queue.length; i++) {
       currentNode = queue.shift();
+      i--;
       callback(currentNode.data);
       if (currentNode.leftChildren !== null) {
         queue.push(currentNode.leftChildren);
@@ -126,7 +123,7 @@ class Tree {
       }
     }
 
-    this.levelOrderForEachRecursive(callback, queue);
+    return;
   }
 }
 

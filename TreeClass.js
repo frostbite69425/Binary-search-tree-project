@@ -105,6 +105,29 @@ class Tree {
     }
     return node;
   }
+
+  levelOrderForEachRecursive(callback, queue = [this.root]) {
+    if (!callback && typeof callback !== "function") {
+      throw new Error("You need to provide a callback function!");
+    }
+    let currentNode;
+    let queueLength = queue.length;
+    if (queueLength === 0) {
+      return;
+    }
+    for (let i = 0; i < queueLength; i++) {
+      currentNode = queue.shift();
+      callback(currentNode.data);
+      if (currentNode.leftChildren !== null) {
+        queue.push(currentNode.leftChildren);
+      }
+      if (currentNode.rightChildren !== null) {
+        queue.push(currentNode.rightChildren);
+      }
+    }
+
+    this.levelOrderForEachRecursive(callback, queue);
+  }
 }
 
 export default Tree;

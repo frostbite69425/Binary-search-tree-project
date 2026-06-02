@@ -122,8 +122,25 @@ class Tree {
         queue.push(currentNode.rightChildren);
       }
     }
-
     return;
+  }
+
+  levelOrderForEachRecursive(callback, queue = [this.root]) {
+    if (!callback && typeof callback !== "function") {
+      throw new Error("You need to provide a callback function!");
+    }
+    if (queue.length === 0) {
+      return;
+    }
+    let currentNode = queue.shift();
+    callback(currentNode.data);
+    if (currentNode.leftChildren !== null) {
+      queue.push(currentNode.leftChildren);
+    }
+    if (currentNode.rightChildren !== null) {
+      queue.push(currentNode.rightChildren);
+    }
+    this.levelOrderForEachIterative(callback, queue);
   }
 }
 

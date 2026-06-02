@@ -16,12 +16,14 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   prettyPrint(node.leftChildren, `${prefix}${isLeft ? "    " : "│   "}`, true);
 };
 
-prettyPrint(test.root);
-test.insert(70);
-console.log(`\n`);
-prettyPrint(test.root);
-console.log(`\n`);
+// prettyPrint(test.root);
+// test.insert(70);
+// console.log(`\n`);
+// prettyPrint(test.root);
+// console.log(`\n`);
 test.levelOrderForEachIterative((el) => console.log(el));
+console.log(`\n`);
+test.levelOrderForEachRecursive((el) => console.log(el));
 // test.deleteItem(7);
 // prettyPrint(test.root);
 // console.log(`\n`);

@@ -70,8 +70,6 @@ class Tree {
       node.rightChildren = this.insert(value, node.rightChildren);
     } else if (value < node.data) {
       node.leftChildren = this.insert(value, node.leftChildren);
-    } else {
-      return;
     }
     return node;
   }
@@ -141,6 +139,62 @@ class Tree {
       queue.push(currentNode.rightChildren);
     }
     this.levelOrderForEachIterative(callback, queue);
+  }
+
+  inOrderForEach(callback, node = this.root) {
+    if (!callback && typeof callback !== "function") {
+      throw new Error("You need to provide a callback function!");
+    }
+    if (node === null) {
+      return;
+    }
+
+    if (node.leftChildren) {
+      this.inOrderForEach(callback, node.leftChildren);
+    }
+    callback(node.data);
+
+    if (node.rightChildren) {
+      this.inOrderForEach(callback, node.rightChildren);
+    }
+  }
+
+  preOrderForEach(callback, node = this.root) {
+    if (!callback && typeof callback !== "function") {
+      throw new Error("You need to provide a callback function!");
+    }
+    if (node === null) {
+      return;
+    }
+
+    callback(node.data);
+
+    if (node.leftChildren) {
+      this.preOrderForEach(callback, node.leftChildren);
+    }
+
+    if (node.rightChildren) {
+      this.preOrderForEach(callback, node.rightChildren);
+    }
+  }
+
+  postOrderForEach(callback, node = this.root) {
+    if (!callback && typeof callback !== "function") {
+      throw new Error("You need to provide a callback function!");
+    }
+    if (node === null) {
+      return;
+    }
+
+    if (node.leftChildren) {
+      this.postOrderForEach(callback, node.leftChildren);
+    }
+
+    if (node.rightChildren) {
+      this.postOrderForEach(callback, node.rightChildren);
+    }
+
+    callback(node.data);
   }
 }
 

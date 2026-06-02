@@ -17,13 +17,22 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 // prettyPrint(test.root);
-// test.insert(70);
+test.insert(70);
+test.insert(71);
+test.insert(8.5);
 // console.log(`\n`);
-// prettyPrint(test.root);
+prettyPrint(test.root);
 // console.log(`\n`);
-test.levelOrderForEachIterative((el) => console.log(el));
+// test.levelOrderForEachIterative((el) => console.log(el));
+// console.log(`\n`);
+// test.levelOrderForEachRecursive((el) => console.log(el));
 console.log(`\n`);
-test.levelOrderForEachRecursive((el) => console.log(el));
+test.inOrderForEach((el) => console.log(el));
+console.log(`\n`);
+test.preOrderForEach((el) => console.log(el));
+console.log(`\n`);
+test.postOrderForEach((el) => console.log(el));
+
 // test.deleteItem(7);
 // prettyPrint(test.root);
 // console.log(`\n`);

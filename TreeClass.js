@@ -196,6 +196,82 @@ class Tree {
 
     callback(node.data);
   }
+
+  #nodeDepth(node = this.root) {
+    if (node === null) {
+      return -1;
+    }
+
+    let leftHeight = this.#nodeDepth(node.leftChildren);
+    let rightHeight = this.#nodeDepth(node.rightChildren);
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  height(value) {
+    let currentNode = this.root;
+    while (currentNode !== null && currentNode.data !== value) {
+      if (value > currentNode.data) {
+        currentNode = currentNode.rightChildren;
+      } else {
+        currentNode = currentNode.leftChildren;
+      }
+    }
+
+    if (currentNode === null) {
+      return undefined;
+    }
+
+    return this.#nodeDepth(currentNode);
+  }
+
+  depth(value) {
+    let depth = 0;
+    let currentNode = this.root;
+    while (currentNode.data !== value && currentNode !== null) {
+      if (value > currentNode.data) {
+        currentNode = currentNode.rightChildren;
+        depth++;
+      } else {
+        currentNode = currentNode.leftChildren;
+        depth++;
+      }
+    }
+
+    if (currentNode === null) {
+      return undefined;
+    } else {
+      return depth;
+    }
+  }
+
+  isBalanced(node = this.root) {
+    if (node === null) {
+      return true;
+    }
+
+    let leftBalance = this.isBalanced(node.leftChildren);
+    let rightBalance = this.isBalanced(node.rightChildren);
+
+    let leftHeight = 0;
+    let rightHeight = 0;
+
+    if (node.leftChildren) {
+      leftHeight = this.height(node.leftChildren.data);
+    }
+    if (node.rightChildren) {
+      rightHeight = this.height(node.rightChildren.data);
+    }
+
+    if (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      leftBalance &&
+      rightBalance
+    ) {
+      return true;
+    }
+    return false;
+  }
 }
 
 export default Tree;

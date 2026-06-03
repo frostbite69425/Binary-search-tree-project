@@ -45,6 +45,7 @@ console.log(`\n`);
 prettyPrint(test.root);
 console.log(`\n`);
 console.log(test.isBalanced());
+console.log(test.includes(97460743));
 // let newTree = test.rebalance();
 // console.log(`\n`);
 // prettyPrint(newTree.root);

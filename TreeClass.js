@@ -37,28 +37,20 @@ class Tree {
     return root;
   }
 
-  includes(value) {
-    let nextNode;
-    const root = this.root;
-    if (root.data === value) {
+  includes(value, node = this.root) {
+    if (node === null) {
+      return false;
+    }
+    if (node.data === value) {
       return true;
-    } else if (value > root.data) {
-      nextNode = root.rightChildren;
-    } else if (value < root.data) {
-      nextNode = root.leftChildren;
     }
-
-    while (nextNode) {
-      if (value == nextNode.data) {
-        return true;
-      } else if (value < nextNode.data) {
-        nextNode = nextNode.leftChildren;
-      } else {
-        nextNode = nextNode.rightArr;
-      }
+    let result;
+    if (node.data < value) {
+      result = this.includes(value, node.rightChildren);
+    } else if (node.data > value) {
+      result = this.includes(value, node.leftChildren);
     }
-
-    return false;
+    return result;
   }
 
   insert(value, node = this.root) {
@@ -99,7 +91,7 @@ class Tree {
 
       const successor = this.#successorNode(node);
       node.data = successor.data;
-      node.right = this.deleteItem(node.data, node.rightChildren);
+      node.rightChildren = this.deleteItem(successor.data, node.rightChildren);
     }
     return node;
   }
@@ -138,7 +130,7 @@ class Tree {
     if (currentNode.rightChildren !== null) {
       queue.push(currentNode.rightChildren);
     }
-    this.levelOrderForEachIterative(callback, queue);
+    this.levelOrderForEachRecursive(callback, queue);
   }
 
   inOrderForEach(callback, node = this.root) {
@@ -228,7 +220,7 @@ class Tree {
   depth(value) {
     let depth = 0;
     let currentNode = this.root;
-    while (currentNode.data !== value && currentNode !== null) {
+    while (currentNode !== null && currentNode.data !== value) {
       if (value > currentNode.data) {
         currentNode = currentNode.rightChildren;
         depth++;

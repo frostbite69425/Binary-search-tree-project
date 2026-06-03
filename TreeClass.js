@@ -245,7 +245,7 @@ class Tree {
     }
   }
 
-  isBalanced() {
+  isBalanced(node = this.root) {
     if (node === null) {
       return true;
     }
@@ -272,8 +272,7 @@ class Tree {
   rebalance() {
     const newArr = [];
     this.inOrderForEach((value) => newArr.push(value));
-    const newTree = new Tree(newArr);
-    return newTree;
+    this.root = this.#buildTree(newArr);
   }
 }
 

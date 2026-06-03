@@ -40,11 +40,10 @@ console.log(`\n`);
 console.log(`depth: ${test.depth(4)}`);
 console.log(`\n`);
 console.log(test.isBalanced());
-test.deleteItem(71);
-test.deleteItem(72);
+let newTree = test.rebalance();
 console.log(`\n`);
-prettyPrint(test.root);
-console.log(test.isBalanced());
+prettyPrint(newTree.root);
+console.log(newTree.isBalanced());
 
 // test.deleteItem(7);
 // prettyPrint(test.root);

@@ -245,24 +245,20 @@ class Tree {
     }
   }
 
-  isBalanced(node = this.root) {
+  isBalanced() {
     if (node === null) {
       return true;
     }
-
     let leftBalance = this.isBalanced(node.leftChildren);
     let rightBalance = this.isBalanced(node.rightChildren);
-
     let leftHeight = 0;
     let rightHeight = 0;
-
     if (node.leftChildren) {
       leftHeight = this.height(node.leftChildren.data);
     }
     if (node.rightChildren) {
       rightHeight = this.height(node.rightChildren.data);
     }
-
     if (
       Math.abs(leftHeight - rightHeight) <= 1 &&
       leftBalance &&
@@ -271,6 +267,13 @@ class Tree {
       return true;
     }
     return false;
+  }
+
+  rebalance() {
+    const newArr = [];
+    this.inOrderForEach((value) => newArr.push(value));
+    const newTree = new Tree(newArr);
+    return newTree;
   }
 }
 
